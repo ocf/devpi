@@ -1,0 +1,4 @@
+devpi-lockdown==1.0.1
+devpi-server==4.9.0
+devpi-web==3.5.1
+
