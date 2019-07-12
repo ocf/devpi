@@ -14,4 +14,6 @@ cook-image:
 .PHONY: push-image
 push-image:
 	docker push $(DOCKER_TAG)
-
+.PHONY: test
+test:
+	@echo "What's a test?"
