@@ -5,7 +5,6 @@ RUN apt-get update \
     python3.7-venv \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-ADD run.sh /
 ADD devpi.conf /
 ADD requirements.txt /
 RUN python3.7 -m ensurepip
