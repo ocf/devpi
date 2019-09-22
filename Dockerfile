@@ -11,4 +11,4 @@ RUN python3.7 -m ensurepip
 RUN python3.7 -m pip install -r /requirements.txt
 VOLUME /mnt
 EXPOSE 3141
-CMD ["devpi-server", "--init", "-c", "devpi.conf"]
+CMD ["devpi-server", "-c", "devpi.conf"]
