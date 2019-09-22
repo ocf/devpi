@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: devpi-ingress
+spec:
+  rules:
+    - host: devpi.ocf.berkeley.edu
+      http:
+        paths:
+          - path: /
+            - backend:
+                serviceName: devpi-service
+                servicePort: 3141
+    - host: devpi.dev-kubernetes.ocf.berkeley.edu
+      http:
+        paths:
+          - path: /
+            - backend:
+                serviceName: devpi-service
+                servicePort: 3141

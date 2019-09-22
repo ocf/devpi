@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: devpi-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: devpi-service
+    spec:
+      securityContext:
+        runAsUser: 506
+      volumes:
+        - name: devpi-data
+          persistentVolumeClaim:
+            claimName: devpi-pvc
+      containers:
+        - name: web
+          image: "docker.ocf.berkeley.edu/devpi:<%= version %>"
+          ports:
+            - name: web
+              containerPort: 3141
+          envFrom:
+            - configMapRef:
+                name: devpi-config
+            - secretRef:
+                name: devpi-secret
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 250m
+          volumeMounts:
+            - name: devpi-data
+              mountPath: /mnt/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: devpi-service
+spec:
+  selector:
+    app: devpi
+  ports:
+    - port: 3141
+      targetPort: 80
